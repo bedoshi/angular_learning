@@ -52,7 +52,6 @@ This is for only my learning angular.
         - this is for importing this component from other file.
         - this class is used in `main.ts`, and this class is also set as `bootstrapModule`. So, when I run this app, this `AppModule` is run first by `bootstrapModule`. next, `AppModule` run `AppComponent`.
 
-
 ### Creating component
 The features are below.
 - Constructing below.
@@ -79,9 +78,9 @@ I make `HelloComponent` as below step.
     import { Component, OnInit } from '@angular/core';
 
     @Component({
-    selector: 'app-hello',
-    templateUrl: './hello.component.html',
-    styleUrls: ['./hello.component.css']
+        selector: 'app-hello',
+        templateUrl: './hello.component.html',
+        styleUrls: ['./hello.component.css']
     })
     export class HelloComponent implements OnInit {
         title:string
@@ -93,7 +92,6 @@ I make `HelloComponent` as below step.
             this.title = 'Hello-app'
             this.message = 'This is my first component'
         }
-
     }
     ```
     - `variable_name:type`
@@ -111,3 +109,94 @@ I make `HelloComponent` as below step.
     ```
 - Run `ng serve` again or look browser. Then I can the page like this.
     ![image](https://user-images.githubusercontent.com/5573785/96905612-a2fbd480-14d3-11eb-938b-cf7e9cb19340.png)
+
+Changing style sheet
+- update `app/hello/hello.component.css` as below
+    ```
+    #body {
+        margin-top: 75px;
+    }
+
+    h1 {
+        font-size: 60pt;
+        letter-spacing: -5px;
+        color: lightblue;
+        position: absolute;
+        top: -70px;
+        right: 0px;
+    }
+
+    p {
+        font-size: 18pt;
+    }
+    ```
+- Run `ng serve` or look browser. Then I can the page like this.
+    ![image](https://user-images.githubusercontent.com/5573785/96906455-c70be580-14d4-11eb-8ef9-43d3dab5efb1.png)
+
+`{{ }}` can be used for calc.
+- Write `<p>Result: {{ 12300 * 1.08 }} yen</p>` in `app/hello/hello.component.html`
+    ```
+    <div id = "body">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <p>Result: {{ 12300 * 1.08 }} yen</p>
+    </div>
+    ```
+- Run `ng serve` or look browser. Then I can the page like this.
+    ![image](https://user-images.githubusercontent.com/5573785/96906766-426d9700-14d5-11eb-8860-e701d77b0077.png)
+
+Calc with property
+- Update `app/hello/hello.component.html` as below
+    ```
+    <div id = "body">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <p>Result: {{ price * 1.08 }} yen</p>
+    </div>
+    ```
+- Update `app/hello/hello.component.ts` as below
+    ```
+    import { Component, OnInit } from '@angular/core';
+
+    @Component({
+        selector: 'app-hello',
+        templateUrl: './hello.component.html',
+        styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+        price:number
+
+        constructor() { }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+            this.price = 123450
+        }
+    }
+    ```
+- Run `ng serve` or look browser. Then I can look the page like below.
+    ![image](https://user-images.githubusercontent.com/5573785/96907190-da6b8080-14d5-11eb-8754-460a1ef5395d.png)
+
+Method calling with `{{ }}`
+- `{{ }}` is not only displaying variable. I can everything what I prepared before.
+- For displaying Time, I make function `today` in `app/hello/hello.component.ts`
+    ```
+    today() {
+        return new Date().toLocaleString()
+    }
+    ```
+- Update `app/hello/hello.component.html` as below.
+    ```
+    <div id = "body">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <p>Result: {{ price * 1.08 }} yen</p>
+        <p>Today: {{ today() }}</p>
+    </div>
+    ```
+- Run `ng serve` or look browser. Then I can look the page like below.
+    ![image](https://user-images.githubusercontent.com/5573785/96907844-c1af9a80-14d6-11eb-88d2-dc3dd42b6941.png)
+
