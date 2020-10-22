@@ -234,4 +234,5 @@ Updating property
     }
     ```
 - Run `ng serve` or look browser. Then I can look the page like below.
+
     ![sample](https://user-images.githubusercontent.com/5573785/96909013-5ff03000-14d8-11eb-8f0a-715d41303f46.gif)
