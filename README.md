@@ -200,3 +200,38 @@ Method calling with `{{ }}`
 - Run `ng serve` or look browser. Then I can look the page like below.
     ![image](https://user-images.githubusercontent.com/5573785/96907844-c1af9a80-14d6-11eb-88d2-dc3dd42b6941.png)
 
+Updating property
+- The value of `{{ }}` is not only displaying the value. The value is available after displaying the page, and it's always updated.
+- Update `app/hello/hello.component.ts` as below
+    ```
+    import { Component, OnInit } from '@angular/core';
+    import { Data } from '@angular/router';
+
+    @Component({
+        selector: 'app-hello',
+        templateUrl: './hello.component.html',
+        styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+        price:number
+        now:Date
+
+        constructor() {
+            setInterval(() => this.now = new Date(), 1000)
+        }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+            this.price = 123450
+        }
+
+        today() {
+            return this.now.toLocaleString()
+        }
+    }
+    ```
+- Run `ng serve` or look browser. Then I can look the page like below.
+    ![sample](https://user-images.githubusercontent.com/5573785/96909013-5ff03000-14d8-11eb-8f0a-715d41303f46.gif)
