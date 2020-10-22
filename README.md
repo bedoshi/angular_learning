@@ -1,7 +1,8 @@
 # Angular_learning
 This is for only my learning angular.
 
-## memo
+## Memo
+### First step
 - `npm install -g @angular/cli`
 - Installed Angular language pack for visual studio.
 - `ng new angular-app`
@@ -50,3 +51,63 @@ This is for only my learning angular.
     - Definition of AppModule class
         - this is for importing this component from other file.
         - this class is used in `main.ts`, and this class is also set as `bootstrapModule`. So, when I run this app, this `AppModule` is run first by `bootstrapModule`. next, `AppModule` run `AppComponent`.
+
+
+### Creating component
+The features are below.
+- Constructing below.
+    - HTML
+    - Style sheet
+    - Script
+- Definition with `@Component` decorator.
+
+I make `HelloComponent` as below step.
+- Run `ng generate component hello`
+- Check the update of `app.module.ts` as using `hello.component`. this component is written as `HelloComponent` in `app.module.ts`.
+- Rewrite `app/hello/hello.component.html` as below
+    ```
+    <div id = "body">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+    </div>
+    ```
+- Look `app/hello/hello.component.ts`
+    - this file is importing `Component` and `OnInit`.
+    - `OnInit` is interface for adding method call to initilize component.
+- Update upper file as below.
+    ```
+    import { Component, OnInit } from '@angular/core';
+
+    @Component({
+    selector: 'app-hello',
+    templateUrl: './hello.component.html',
+    styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+
+        constructor() { }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+        }
+
+    }
+    ```
+    - `variable_name:type`
+- Update `index.html` like below
+    ```
+    <body>
+        <app-hello></app-hello>
+    </body>
+    ```
+- Run `ng serve`
+- Look nothing on browser at `http://localhost:4200`.
+- Update `app.module.ts` as below.
+    ```
+    bootstrap: [HelloComponent]
+    ```
+- Run `ng serve` again or look browser. Then I can the page like this.
+    ![image](https://user-images.githubusercontent.com/5573785/96905612-a2fbd480-14d3-11eb-938b-cf7e9cb19340.png)
