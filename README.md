@@ -5,3 +5,5 @@ This is for only my learning angular.
 I did below things.
 - `npm install -g @angular/cli`
 - installed Angular language pack for visual studio.
+- `ng new angular-app`
+- pressed twice enter-key
