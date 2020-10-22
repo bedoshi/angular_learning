@@ -2,7 +2,6 @@
 This is for only my learning angular.
 
 ## memo
-I did below things.
 - `npm install -g @angular/cli`
 - Installed Angular language pack for visual studio.
 - `ng new angular-app`
