@@ -340,3 +340,52 @@ Updating element
 - Run `ng serve` again or look browser. then I can look the page like below.
 
     ![sample2](https://user-images.githubusercontent.com/5573785/96976871-4e9a3880-1557-11eb-8eca-eaba66e5d5a4.gif)
+
+Using template inline html
+- I can specify html directry on hello.component.ts
+- Update `app/hello/hello.component.ts` to below
+    ```
+    import { Component, OnInit } from '@angular/core';
+    import { Data } from '@angular/router';
+
+    @Component({
+        selector: 'app-hello',
+        // templateUrl: './hello.component.html',
+        template: `
+            <div id = "body">
+                <h1>{{ title }}</h1>
+                <p>{{ message }}</p>
+                <p [class]="styleClass" >{{ message }}</p>
+                <p>Result: {{ price * 1.08 }} yen</p>
+                <p>Today: {{ today() }}</p>
+            </div>
+        `,
+        styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+        price:number
+        now:Date
+        styleClass:string
+
+        constructor() {
+            setInterval(() => {
+            this.now = new Date()
+            this.styleClass = this.styleClass == 'red' ? '' : 'red'
+            }, 1000)
+        }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+            this.price = 123450
+            this.styleClass = 'red'
+        }
+
+        today() {
+            return this.now.toLocaleString()
+        }
+    }
+    ```
+- Run `ng serve` again or look browser, then I can look the page like upper.
