@@ -108,6 +108,7 @@ I make `HelloComponent` as below step.
     bootstrap: [HelloComponent]
     ```
 - Run `ng serve` again or look browser. Then I can the page like this.
+
     ![image](https://user-images.githubusercontent.com/5573785/96905612-a2fbd480-14d3-11eb-938b-cf7e9cb19340.png)
 
 Changing style sheet
@@ -131,6 +132,7 @@ Changing style sheet
     }
     ```
 - Run `ng serve` or look browser. Then I can the page like this.
+
     ![image](https://user-images.githubusercontent.com/5573785/96906455-c70be580-14d4-11eb-8ef9-43d3dab5efb1.png)
 
 `{{ }}` can be used for calc.
@@ -143,6 +145,7 @@ Changing style sheet
     </div>
     ```
 - Run `ng serve` or look browser. Then I can the page like this.
+
     ![image](https://user-images.githubusercontent.com/5573785/96906766-426d9700-14d5-11eb-8860-e701d77b0077.png)
 
 Calc with property
@@ -178,6 +181,7 @@ Calc with property
     }
     ```
 - Run `ng serve` or look browser. Then I can look the page like below.
+
     ![image](https://user-images.githubusercontent.com/5573785/96907190-da6b8080-14d5-11eb-8754-460a1ef5395d.png)
 
 Method calling with `{{ }}`
@@ -198,6 +202,7 @@ Method calling with `{{ }}`
     </div>
     ```
 - Run `ng serve` or look browser. Then I can look the page like below.
+
     ![image](https://user-images.githubusercontent.com/5573785/96907844-c1af9a80-14d6-11eb-88d2-dc3dd42b6941.png)
 
 Updating property
@@ -236,3 +241,60 @@ Updating property
 - Run `ng serve` or look browser. Then I can look the page like below.
 
     ![sample](https://user-images.githubusercontent.com/5573785/96909013-5ff03000-14d8-11eb-8f0a-715d41303f46.gif)
+
+Setting value to element
+- I learned setting value to `<p> blahblah </p>` with `{{ }}`. But I can set value to element.
+- Element is ... `<div element=blahblahblah>`. Well I can set it as `<div [element]="property name">`. I can't use `{{ }}` into the part of property name.
+- Update `app/hello/hello.component.html` as below.
+    ```
+    <div id = "body">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <p [class]="styleClass" >{{ message }}</p>
+        <p>Result: {{ price * 1.08 }} yen</p>
+        <p>Today: {{ today() }}</p>
+    </div>
+    ```
+- Update `app/hello/hello.component.ts` as below
+    ```
+    import { Component, OnInit } from '@angular/core';
+    import { Data } from '@angular/router';
+
+    @Component({
+        selector: 'app-hello',
+        templateUrl: './hello.component.html',
+        styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+        price:number
+        now:Date
+        styleClass:string
+
+        constructor() {
+            setInterval(() => this.now = new Date(), 1000)
+        }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+            this.price = 123450
+            this.styleClass = 'red'
+        }
+
+        today() {
+            return this.now.toLocaleString()
+        }
+    }
+    ```
+- Add below into `app/hello/hello.component.css` 
+    ```
+    .red {
+        color: white;
+        background-color: red;
+    }
+    ```
+- Run `ng serve` again or look browser. Then I can look the page as below.
+
+    ![image](https://user-images.githubusercontent.com/5573785/96975854-0c242c00-1556-11eb-8dfa-4aab58c4c011.png)
