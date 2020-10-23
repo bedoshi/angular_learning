@@ -298,3 +298,45 @@ Setting value to element
 - Run `ng serve` again or look browser. Then I can look the page as below.
 
     ![image](https://user-images.githubusercontent.com/5573785/96975854-0c242c00-1556-11eb-8dfa-4aab58c4c011.png)
+
+Updating element
+- I learned setting element with asigning value to `styleClass`. Well I update this property per specific interval.
+- Update `app/hello/hello.component.ts` as below.
+    ```
+    import { Component, OnInit } from '@angular/core';
+    import { Data } from '@angular/router';
+
+    @Component({
+        selector: 'app-hello',
+        templateUrl: './hello.component.html',
+        styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+        price:number
+        now:Date
+        styleClass:string
+
+        constructor() {
+            setInterval(() => {
+            this.now = new Date()
+            this.styleClass = this.styleClass == 'red' ? '' : 'red'
+            }, 1000)
+        }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+            this.price = 123450
+            this.styleClass = 'red'
+        }
+
+        today() {
+            return this.now.toLocaleString()
+        }
+    }
+    ```
+- Run `ng serve` again or look browser. then I can look the page like below.
+
+    ![sample2](https://user-images.githubusercontent.com/5573785/96976871-4e9a3880-1557-11eb-8eca-eaba66e5d5a4.gif)
