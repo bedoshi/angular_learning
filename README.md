@@ -389,3 +389,69 @@ Using template inline html
     }
     ```
 - Run `ng serve` again or look browser, then I can look the page like upper.
+
+### Event binding
+Event hook is so important things in frontend development. In Angular, I can this as below.
+
+```
+(click) = "function()"
+```
+
+Not using `(onclick)`, do `(click)`. This Writing is called "Event binding".
+
+From now, I create a sample of counting button push.
+- Update `app/hello/hello.component.ts` as below 
+    ```
+    import { Component, OnInit } from '@angular/core';
+    import { Data } from '@angular/router';
+
+    @Component({
+        selector: 'app-hello',
+        templateUrl: './hello.component.html',
+        styleUrls: ['./hello.component.css']
+    })
+    export class HelloComponent implements OnInit {
+        title:string
+        message:string
+        price:number
+        now:Date
+        styleClass:string
+        count: number
+
+        constructor() {
+            setInterval(() => {
+            this.now = new Date()
+            this.styleClass = this.styleClass == 'red' ? '' : 'red'
+            }, 1000)
+        }
+
+        ngOnInit(): void {
+            this.title = 'Hello-app'
+            this.message = 'This is my first component'
+            this.price = 123450
+            this.styleClass = 'red'
+        }
+
+        today() {
+            return this.now.toLocaleString()
+        }
+
+        doCount() {
+            return this.message = ++this.count + "回クリックしました"
+        }
+    }
+    ```
+- Update `app/hello/hello.component.html` as below
+    ```
+    <div id = "body">
+        <h1>{{ title }}</h1>
+        <p>{{ message }}</p>
+        <p [class]="styleClass">{{ message }}</p>
+        <p>Result: {{ price * 1.08 }} yen</p>
+        <p>Today: {{ today() }}</p>
+        <button (click) = "doCount()">Click</button>
+    </div>
+    ```
+- Run `ng serve` and Then I can look the page like below.
+
+    ![sample](https://user-images.githubusercontent.com/5573785/97098319-faaa6380-16be-11eb-8a3d-0f52b226e920.gif)
